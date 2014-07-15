@@ -118,8 +118,8 @@ inline const void *TChair::operator[](Int_t i) const
 }
 
 // $Log$
-// Revision 1.1  2014/07/15 16:45:57  pzuccon
-// Initial revision
+// Revision 1.1.1.1  2014/07/15 16:45:57  pzuccon
+// root AMS first import
 //
 // Revision 1.5  2006/07/03 16:10:46  brun
 // from Axel:

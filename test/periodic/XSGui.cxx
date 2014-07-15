@@ -1,8 +1,8 @@
 /*
  * $Header$
  * $Log$
- * Revision 1.1  2014/07/15 16:46:10  pzuccon
- * Initial revision
+ * Revision 1.1.1.1  2014/07/15 16:46:10  pzuccon
+ * root AMS first import
  *
  *
  * The graphical user interface for the Neutron Cross section database

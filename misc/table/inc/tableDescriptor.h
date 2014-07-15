@@ -71,8 +71,8 @@ typedef struct tableDescriptor_st {
     int          fType;        /* The data type of the selected column                                  */
 } TABLEDESCRIPTOR_ST;
 // $Log$
-// Revision 1.1  2014/07/15 16:45:57  pzuccon
-// Initial revision
+// Revision 1.1.1.1  2014/07/15 16:45:57  pzuccon
+// root AMS first import
 //
 // Revision 1.2  2003/01/27 20:41:36  brun
 // New version of the Table package by Valeri Fine.
