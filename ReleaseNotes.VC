@@ -1,0 +1,157 @@
+./hist/hist/inc/TVirtualHistPainter.h
+./hist/hist/inc/TVirtualGraphPainter.h
+changed fgPainter to be public
+
+
+./core/unix/src/TUnixSystem.cxx  
+
+
+
+C readdir to readdir64  (2times)
+C stat to stat64 in UnixOpendir
+
+A
+ if(getenv("HOME")){
+     strcpy(mydir,getenv("HOME"));
+    return mydir;
+   }
+   else{
+    cout<<"TUnixSystem::UnixHomedirectory-I-No $HOME VarDefinedWillProcess getpwuid()"<<endl;
+    }
+
+in UnixHomedirectory
+
+
+
+
+
+./core/base/src/TROOT.cxx
+
+D  exit(1)   if not defined ROOTSYS
+
+C 
+if(!gSystem->Getenv("ROOTSYS"))gSystem->Setenv("ROOTSYS", gSystem->DirName(rs));
+
+./core/base/inc/TDirectory.h
+A
+#pragma omp threadprivate(gDirectory)
+
+
+./net/netx/inc/TXNetFile.h
+A
+#pragma omp threadprivate(fgInitDone)
+
+graf3d/g3d/src/TTUBE.cxx
+A
+#pragma omp threadprivate(buffer)
+
+tree/tree/src/TBranchElement.cxx
+
+#pragma omp critical
+ b.ApplySequence(*fReadActionSequence, fObject);    ( 2 times)
+
+
+
+
+tree/tree/src/TBranch.cxx
+prepared, but not activated 
+//#pragma omp critical
+   (this->*fReadLeaves)(*buf);
+
+
+hist/hist/src/TProfile.cxx
+
+A alot of 
+
+#pragma omp atomic
+
+hist/hist/src/TH1.cxx
+A alot of 
+
+#pragma omp atomic
+
+hist/hist/inc/TH1.h
+
+A #pragma omp atomic
+in AddBinContent
+
+
+hist/hist/src/TH2.cxx
+A alot of 
+
+#pragma omp atomic
+
+hist/hist/inc/TH2.h
+
+A #pragma omp atomic
+in AddBinContent
+
+
+
+/gui/gui/inc/TRootCanvas.h
+
+A
+
+  TGCanvas*  GetCanvasWindow()const{return    fCanvasWindow;   }
+
+core/base/inc/TVirtualPad.h
+
+A
+  virtual void     PaintLine(Double_t x1, Double_t y1, Double_t x2, Double_t y2, Color_t color) = 0;
+
+
+/graf2d/gpad/inc/TPad.h
+
+A
+
+PaintFillArea3D(Int_t n, Float_t *p1, Option_t * opt="");
+
+PaintLine(Double_t x1, Double_t y1, Double_t x2, Double_t y2, Color_t color);
+
+
+
+
+/graf2d/gpad/src/TPad.cxx
+
+
+
+
+A
+
+PaintFillArea3D(Int_t n, Float_t *p1, Option_t * opt="");
+
+PaintLine(Double_t x1, Double_t y1, Double_t x2, Double_t y2, Color_t color);
+
+
+
+
+./graf3d/g3d/inc/TView3D.h
+A
+Bool_t Hack;
+
+
+./graf3d/g3d/src/TView3D.cxx
+
+
+C  see for Hack
+
+
+
+
+./hist/histpainter/src/TGraphPainter.cxx
+
+PaintLine with color
+
+config/Makefile.linuxx8664icc
+
+add -openmp to icc, icpc
+
+./build/unix/staticobjectlist.sh
+
+
+./configure linuxx8664icc  --with-xrootd=/afs/cern.ch/ams/local2/opt/xrootd-icc64-11 --enable-minuit2 --enable-roofit --disable-ssl --enable-builtin-freetype --enable-builtin-pcre --enable-builtin-zlib --enable-builtin-lzma
+
+
+patch file
+
+diff -rupN original/ new/ > root-v5-34-09.patch
