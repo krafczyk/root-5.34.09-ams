@@ -32,9 +32,8 @@ make install
 
 cd $DD
 
-./configure --prefix=$INST/root534/ \
---etcdir=$INST/root534/etc/
---enable-asimage \
+export ROOTSYS=$INST/root534/ \
+./configure --enable-asimage \
 --enable-builtin-afterimage \
 --enable-builtin-ftgl \
 --enable-builtin-freetype \
