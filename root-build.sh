@@ -7,9 +7,9 @@ echo Usage: $0 [inst_dir]
 exit -1
 
 fi
-
 INST=$1
 
+build_xrootd() {
 # First get xrootd we are using version 3.2.7
 
 wget http://xrootd.org/download/v3.2.7/xrootd-3.2.7.tar.gz
@@ -31,9 +31,12 @@ make -j
 make install
 
 cd $DD
+}
 
-export ROOTSYS=$INST/root534/ \
+build_xrootd
+
 ./configure --enable-asimage \
+--enable-astiff \
 --enable-builtin-afterimage \
 --enable-builtin-ftgl \
 --enable-builtin-freetype \
@@ -54,6 +57,7 @@ export ROOTSYS=$INST/root534/ \
 --enable-memstat \
 --enable-minuit2 \
 --enable-mysql \
+--enable-oracle \
 --enable-opengl \
 --enable-pgsql \
 --enable-python \
@@ -61,23 +65,22 @@ export ROOTSYS=$INST/root534/ \
 --enable-rfio \
 --enable-roofit \
 --enable-shadowpw \
---enable-ssl \
+--enable-shared \
+--disable-ssl \
 --enable-tmva \
 --enable-x11 \
 --enable-xft \
 --enable-xml \
 --enable-xrootd \
 --with-xrootd=$INST/xrootd
-if  [ $? -eq 0 ]; then
+
+
+
 make -j -i 
-fi
 
 make
 
-if  [ $? -eq 0 ]; then
 make static
-fi
 
-if  [ $? -eq 0 ]; then
+export ROOTSYS=$INST/root534/ 
 make install
-fi

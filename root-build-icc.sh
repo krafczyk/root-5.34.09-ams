@@ -7,11 +7,12 @@ echo Usage: $0 [inst_dir]
 exit -1
 
 fi
-
 INST=$1
+export INTEL_LICENSE_FILE=/afs/cern.ch/ams/opt/intel/licenses/
 export PATH=/afs/cern.ch/ams/opt/intel/composer_xe_2013_sp1.3.174/bin/intel64/:$PATH
 export LD_LIBRARY_PATH=/afs/cern.ch/ams/opt/intel/composer_xe_2013_sp1.3.174/compiler/lib/intel64/:$LD_LIBRARY_PATH
 
+build_xrootd() {
 # First get xrootd we are using version 3.2.7
 
 wget http://xrootd.org/download/v3.2.7/xrootd-3.2.7.tar.gz
@@ -33,10 +34,12 @@ make -j
 make install
 
 cd $DD
+}
 
-./configure linuxx8664icc --prefix=$INST/root534/ \
---etcdir=$INST/root534/etc/ \
---enable-asimage \
+build_xrootd
+
+./configure linuxx864icc --enable-asimage \
+--enable-astiff \
 --enable-builtin-afterimage \
 --enable-builtin-ftgl \
 --enable-builtin-freetype \
@@ -57,6 +60,7 @@ cd $DD
 --enable-memstat \
 --enable-minuit2 \
 --enable-mysql \
+--enable-oracle \
 --enable-opengl \
 --enable-pgsql \
 --enable-python \
@@ -64,24 +68,22 @@ cd $DD
 --enable-rfio \
 --enable-roofit \
 --enable-shadowpw \
---enable-ssl \
+--enable-shared \
+--disable-ssl \
 --enable-tmva \
 --enable-x11 \
 --enable-xft \
 --enable-xml \
 --enable-xrootd \
 --with-xrootd=$INST/xrootd
-if  [ $? -eq 0 ]; then
-make -j -i 
-fi
+
+
 
 make -j -i 
+
 make
 
-if  [ $? -eq 0 ]; then
 make static
-fi
 
-if  [ $? -eq 0 ]; then
+export ROOTSYS=$INST/root534/ 
 make install
-fi
